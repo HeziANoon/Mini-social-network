@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+<body>
+    <nav>
+        <div>Social Network</div>
+        <div>
+            <a href="/feed">News</a>
+            {% if session.user_id %}
+                <a href="/logout">Выйти</a>
+            {% else %}
+                <a href="/login">Войти</a>
+            {% endif %}
+        </div>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>
