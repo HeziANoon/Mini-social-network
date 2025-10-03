@@ -51,7 +51,17 @@ def register():
             return "Registration is successfully! <a href='/login'>Login</a>"
     else:
         return render_template('register.html')
-    
+
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session:
+        return redirect('/login')
+    user_id = session['user_id']
+    with Session(engine) as db_session:
+        user = db_session.query(User).filter_by(id=user_id).first()
+        if user == None:
+            return "User does not exist <a href='/register'>Regiter</a>"
+    return render_template('profile.html', user=user)
 
 @app.route('/logout')
 def logout():
